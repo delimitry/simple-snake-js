@@ -77,7 +77,7 @@ function Snake(canvas, context, point_size) {
 			context.fillText('You Win', canvas.width / 2 - 30, canvas.height / 2);
 		}
 
-		if (this.game_paused) {
+		if (this.game_paused && !this.game_win && !this.game_over) {
 			context.fillStyle = 'rgb(255,255,0)';
 			context.font = 'bold 20px Arial';
 			context.fillText('Pause', canvas.width / 2 - 30, canvas.height / 2);
