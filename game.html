@@ -12,6 +12,7 @@ Author: delimitry
 <script type="text/javascript" src="js/snake.js"></script>
 <canvas id="game_canvas" style="border: solid 1px lime;"></canvas><br/>
 <button onclick="snake.init()">New game</button>
+<a style="color:white; font-family: arial; font-size: 12;">[Space] - Pause</a>
 
 <script type="text/javascript">
 
@@ -26,7 +27,7 @@ var context;
 var snake;
 
 function checkCanvasIsSupported() {
-  canvas = document.getElementById("game_canvas");
+	canvas = document.getElementById("game_canvas");
 	canvas.width = 480;
 	canvas.height = 320;	
 	if (canvas.getContext) {
@@ -59,12 +60,10 @@ document.onkeydown = function(event) {
 			break; 
 		case DOWN:
 			snake.update_direction(SnakeDirections.DOWN);
-			break; 
-
+			break;
 		case SPACE:
 			snake.toggle_pause();
-			break; 
-
+			break;
 		default: 
 			break; 
 	} 
