@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 
 function Point(x, y) {
-  this.x = x;
+	this.x = x;
 	this.y = y;
 
 	this.collideWith = function(x, y) {
@@ -33,7 +33,7 @@ function Snake(canvas, context, point_size) {
 	this.direction = SnakeDirections.RIGHT;
 	this.point_size = point_size;
 	this.body = new Array();
-	this.eat = new Point();
+	this.food = new Point();
 
 	this.init = function() {		
 		this.score = 0;
@@ -50,9 +50,9 @@ function Snake(canvas, context, point_size) {
 			this.body.push(new Point(pos_x, pos_y));
 		};
 		
-		eat_x = Math.floor(getRandomRange(0, canvas.width - this.point_size) / this.point_size) * this.point_size;
-		eat_y = Math.floor(getRandomRange(0, canvas.height - this.point_size) / this.point_size) * this.point_size;
-		this.eat = new Point(eat_x, eat_y);
+		food_x = Math.floor(getRandomRange(0, canvas.width - this.point_size) / this.point_size) * this.point_size;
+		food_y = Math.floor(getRandomRange(0, canvas.height - this.point_size) / this.point_size) * this.point_size;
+		this.food = new Point(food_x, food_y);
 	}
 
 
@@ -63,7 +63,7 @@ function Snake(canvas, context, point_size) {
 		};
 
 		context.fillStyle = 'rgb(255,0,255)';
-		context.fillRect(this.eat.x, this.eat.y, this.point_size, this.point_size);	
+		context.fillRect(this.food.x, this.food.y, this.point_size, this.point_size);	
 
 		if (this.game_over) {
 			context.fillStyle = 'rgb(255,255,0)';
@@ -157,11 +157,11 @@ function Snake(canvas, context, point_size) {
 			}
 		}
 
-		if (this.body[0].collideWith(this.eat.x, this.eat.y)) {
-			eat_x = Math.floor(getRandomRange(0, canvas.width - this.point_size) / this.point_size) * this.point_size;
-			eat_y = Math.floor(getRandomRange(0, canvas.height - this.point_size) / this.point_size) * this.point_size;
-			this.eat = new Point(eat_x, eat_y);
-			this.body.push(new Point(eat_x, eat_y));
+		if (this.body[0].collideWith(this.food.x, this.food.y)) {
+			food_x = Math.floor(getRandomRange(0, canvas.width - this.point_size) / this.point_size) * this.point_size;
+			food_y = Math.floor(getRandomRange(0, canvas.height - this.point_size) / this.point_size) * this.point_size;
+			this.food = new Point(food_x, food_y);
+			this.body.push(new Point(food_x, food_y));
 			this.score += 10;
 			if (this.score > 250) {
 				this.game_win = true;
