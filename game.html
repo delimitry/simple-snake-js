@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Snake Game</title>
+</head>
+<!--
+======================================================================
+JavaScript Snake Game
+Author: delimitry
+======================================================================
+-->
+<body onload="checkCanvasIsSupported();" style="background: #000">
+<script type="text/javascript" src="js/snake.js"></script>
+<canvas id="game_canvas" style="border: solid 1px lime;"></canvas><br/>
+<button onclick="snake.init()">New game</button>
+
+<script type="text/javascript">
+
+var LEFT = 37;
+var UP = 38;
+var RIGHT = 39;
+var DOWN = 40;
+var SPACE = 32;
+
+var canvas;
+var context;
+var snake;
+
+function checkCanvasIsSupported() {
+  canvas = document.getElementById("game_canvas");
+	canvas.width = 480;
+	canvas.height = 320;	
+	if (canvas.getContext) {
+		context = canvas.getContext('2d');
+		snake = new Snake(canvas, context, 10);
+		snake.init();
+		render();
+		setInterval(render, 100);
+	} else {
+		alert("Sorry, but your browser doesn't support a canvas.");
+	}
+}
+
+document.onkeydown = function(event) {
+	var keyCode;
+	if (event == null) {
+		keyCode = window.event.keyCode; 
+	} else {
+		keyCode = event.keyCode; 
+	}
+	switch (keyCode) {
+		case LEFT:
+			snake.update_direction(SnakeDirections.LEFT);
+			break; 
+		case UP:
+			snake.update_direction(SnakeDirections.UP);
+			break; 
+		case RIGHT:
+			snake.update_direction(SnakeDirections.RIGHT);
+			break; 
+		case DOWN:
+			snake.update_direction(SnakeDirections.DOWN);
+			break; 
+
+		case SPACE:
+			snake.toggle_pause();
+			break; 
+
+		default: 
+			break; 
+	} 
+}
+
+function render() {
+	context.clearRect(0, 0, canvas.width , canvas.height);
+	snake.update();
+	snake.draw();
+}
+
+</script>
+
+</body>
+</html>
